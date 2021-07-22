@@ -50,5 +50,5 @@
     "*.{js,jsx}": "eslint --cache --fix",
     "*.{js,jsx,css,md,scss}": "prettier --write"
   },
-  "homepage": "https://solarenergy990.github.io/goit-react-hw-03-phonebook"
+  "homepage": "https://solarenergy990.github.io/goit-react-hw-03-image-finder"
 }
