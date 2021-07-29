@@ -1,20 +1,24 @@
 import React, { Component } from "react";
+import s from "./Searchbar.module.css";
+import propTypes from "prop-types";
 
 class Searchbar extends Component {
   state = {
     imageName: "",
   };
 
+  static propTypes = { onSubmit: propTypes.func };
+
   handleNameChange = (evt) => {
     this.setState({ imageName: evt.currentTarget.value.toLowerCase() });
-    console.log("curr target", evt.currentTarget.value.toLowerCase());
   };
 
   handleSubmit = (evt) => {
     evt.preventDefault();
 
     if (this.state.imageName.trim() === "") {
-      alert("Enter something in the search field");
+      alert("Enter search query in the search field"); //toastify here
+      return;
     }
     this.props.onSubmit(this.state.imageName);
     this.setState({ imageName: "" });
@@ -22,14 +26,14 @@ class Searchbar extends Component {
 
   render() {
     return (
-      <header className="Searchbar">
-        <form className="SearchForm" onSubmit={this.handleSubmit}>
-          <button type="submit" className="SearchForm-button">
-            <span className="SearchForm-button-label">Search</span>
+      <header className={s.Searchbar}>
+        <form className={s.SearchForm} onSubmit={this.handleSubmit}>
+          <button type="submit" className={s.SearchFormButton}>
+            <span className={s.SearchFormButtonLabel}>Search</span>
           </button>
 
           <input
-            className="SearchForm-input"
+            className={s.SearchFormInput}
             type="text"
             autoComplete="off"
             autoFocus
