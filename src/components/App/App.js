@@ -95,7 +95,12 @@ class App extends Component {
         )}
         <Searchbar onSubmit={this.handleFormSubmit} />
         <Container>
-          <ImageGallery imageArr={pictures} onModalOpen={this.onLargeImgOpen} />
+          {pictures.length > 0 && (
+            <ImageGallery
+              imageArr={pictures}
+              onModalOpen={this.onLargeImgOpen}
+            />
+          )}
         </Container>
 
         <Container>
