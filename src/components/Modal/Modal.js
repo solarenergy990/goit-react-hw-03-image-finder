@@ -6,7 +6,7 @@ import propTypes from "prop-types";
 const modalRoot = document.querySelector("#modal-root");
 
 class Modal extends Component {
-  static propTypes = { onModalClose: propTypes.func };
+  static propTypes = { onModalClose: propTypes.func.isRequired };
 
   componentDidMount() {
     console.log("component did mount");
