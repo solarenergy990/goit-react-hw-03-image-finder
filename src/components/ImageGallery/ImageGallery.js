@@ -5,13 +5,13 @@ import s from "./ImageGallery.module.css";
 // import imageAPI from "../services/image-api";
 
 class imageGallery extends Component {
-  static defaultProps = { imageArr: propTypes.array };
+  static defaultProps = { imageArr: propTypes.array.isRequired };
   static propTypes = {
-    imageArr: propTypes.array,
+    imageArr: propTypes.arrayOf(propTypes.object),
     onModalOpen: propTypes.func,
   };
   render() {
-    // console.log(this.props.imageArr);
+    console.log(this.props.imageArr);
     const { imageArr, onModalOpen } = this.props;
     return (
       <div>
