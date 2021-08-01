@@ -87,9 +87,11 @@ class App extends Component {
     return (
       <div className={s.App}>
         {openModal && (
-          <Modal onModalClose={this.modalToggler}>
-            <img src={largeImg} alt={searchQuery} />
-          </Modal>
+          <Modal
+            onModalClose={this.modalToggler}
+            src={largeImg}
+            alt={searchQuery}
+          />
         )}
         <Searchbar onSubmit={this.handleFormSubmit} />
         <Container>
