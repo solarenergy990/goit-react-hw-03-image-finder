@@ -7,7 +7,7 @@ import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 import Container from "../Container/Container";
 import s from "./App.module.css";
-import imageAPI from "../services/image-api";
+import imageAPI from "../../services/image-api";
 
 class App extends Component {
   state = {
@@ -109,5 +109,4 @@ class App extends Component {
   }
 }
 
-// check
 export default App;
