@@ -11,7 +11,7 @@ class imageGallery extends Component {
     onModalOpen: propTypes.func,
   };
   render() {
-    console.log(this.props.imageArr);
+    // console.log(this.props.imageArr);
     const { imageArr, onModalOpen } = this.props;
     return (
       <div>
@@ -21,8 +21,7 @@ class imageGallery extends Component {
               return (
                 <ImageGalleryItem
                   image={image}
-                  key={image.id}
-                  largeImageURL={image.largeImageURL}
+                  key={image.imageId}
                   onModalOpen={onModalOpen}
                 />
               );

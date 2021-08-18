@@ -2,21 +2,21 @@ import React from "react";
 import s from "./ImageGalleryItem.module.css";
 import PropTypes from "prop-types";
 
-const ImageGalleryItem = ({ image, largeImageURL, onModalOpen }) => {
+const ImageGalleryItem = ({ image, onModalOpen }) => {
   // console.log(image);
-  const { webformatURL, tags } = image;
+  const { smallImg, imgTag, largeImg } = image;
 
   return (
     <li className={s.ImageGalleryItem}>
       <img
-        src={webformatURL}
-        alt={tags}
+        src={smallImg}
+        alt={imgTag}
         onClick={(evt) => {
           console.log(evt.target);
           onModalOpen(evt.target.attributes["data-large"].value);
         }}
         className={s.ImageGalleryItemImage}
-        data-large={largeImageURL}
+        data-large={largeImg}
       />
     </li>
   );
@@ -24,11 +24,12 @@ const ImageGalleryItem = ({ image, largeImageURL, onModalOpen }) => {
 
 ImageGalleryItem.propTypes = {
   image: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    tags: PropTypes.string.isRequired,
-    webformatURL: PropTypes.string.isRequired,
+    imageId: PropTypes.number.isRequired,
+    imgTag: PropTypes.string.isRequired,
+    smallImg: PropTypes.string.isRequired,
+    largeImg: PropTypes.string.isRequired,
   }),
-  largeImageURL: PropTypes.string.isRequired,
+
   onModalOpen: PropTypes.func.isRequired,
 };
 export default ImageGalleryItem;

@@ -9,6 +9,8 @@ import Container from "../Container/Container";
 import s from "./App.module.css";
 import imageAPI from "../../services/image-api";
 
+import dataExtractor from "../../utils/dataExtractor";
+
 class App extends Component {
   state = {
     pictures: [],
@@ -20,7 +22,6 @@ class App extends Component {
   };
 
   handleFormSubmit = (searchQuery) => {
-    const query = searchQuery;
     const page = 1;
 
     // console.log(searchQuery);
@@ -28,21 +29,28 @@ class App extends Component {
       searchQuery,
       currentPage: page,
       pictures: [],
-      isLoading: true,
-      largeImg: "",
     });
-
-    this.fetchPictures(query, page);
   };
 
-  fetchPictures = (query, page) => {
-    // console.log(this.state.currentPage);
-    // console.log(this.state.pictures);
+  componentDidUpdate(prevProps, prevState) {
+    const { currentPage, searchQuery } = this.state;
 
+    if (
+      searchQuery !== prevState.searchQuery ||
+      currentPage !== prevState.currentPage
+    ) {
+      this.fetchPictures(searchQuery, currentPage);
+    }
+    if (currentPage > 1) {
+      this.scrollDown();
+    }
+  }
+
+  fetchPictures = (query, page) => {
     return imageAPI.fetchImage(query, page).then((pictures) => {
       this.setState((prevState) => ({
-        pictures: [...prevState.pictures, ...pictures],
-        currentPage: prevState.currentPage + 1,
+        pictures: [...prevState.pictures, ...dataExtractor(pictures)],
+
         isLoading: false,
       }));
       if (this.state.pictures.length === 0) {
@@ -59,10 +67,10 @@ class App extends Component {
   };
 
   onLoadMore = () => {
-    const { currentPage, searchQuery } = this.state;
-
-    this.setState({ isLoading: true });
-    this.fetchPictures(searchQuery, currentPage).finally(this.scrollDown);
+    this.setState((prevState) => ({
+      currentPage: prevState.currentPage + 1,
+      isLoading: true,
+    }));
   };
 
   setLargeImg = (imgLink) => {
